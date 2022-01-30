@@ -25,6 +25,9 @@ saveWord = () => {
   div.className = "saved-word";
   div.setAttribute("data-word", writtenLetter);
 
+  let guessedCount = parseInt(localStorage.getItem("guessedWordCount"));
+  localStorage.setItem("guessedWordCount", guessedCount + 1);
+
   for (let x = 0; x < writtenLetter.length; x++) {
     let boxDiv = document.createElement("div");
     boxDiv.className = "saved-box";
@@ -78,6 +81,11 @@ type = (e) => {
     textBoxes[writtenLetter.length].classList.remove("active-box");
   } else if (e.key == "Enter") {
     if (writtenLetter == word) {
+      let winCount = parseInt(
+        localStorage.getItem("correctlyGuessedWordCount")
+      );
+      localStorage.setItem("correctlyGuessedWordCount", winCount + 1);
+
       alertBox.textContent = "You won, congratulations";
       alertBox.style.display = "block";
 

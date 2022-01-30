@@ -1,3 +1,7 @@
+addExtraZero = (x) => {
+  return x < 10 ? "0" + x : x;
+};
+
 function initWord() {
   writtenLetter = "";
   for (let x = 0; x < length; x++) {
@@ -7,6 +11,26 @@ function initWord() {
     wordArea.appendChild(div);
 
     textBoxes = document.querySelectorAll(".letter-box");
+  }
+
+  if (!localStorage.getItem("firstDate")) {
+    let d = new Date();
+
+    let day = addExtraZero(d.getDate());
+    let month = addExtraZero(d.getMonth() + 1);
+    let year = addExtraZero(d.getFullYear());
+
+    let time = d.getTime();
+
+    let date = [day, month, year, time];
+
+    localStorage.setItem("firstDate", JSON.stringify(date));
+    localStorage.setItem("guessedWordCount", 0);
+    localStorage.setItem("correctlyGuessedWordCount", 0);
+    localStorage.setItem("playedGameCount", 1);
+  } else {
+    let playedCount = parseInt(localStorage.getItem("playedGameCount"));
+    localStorage.setItem("playedGameCount", playedCount + 1);
   }
 }
 
