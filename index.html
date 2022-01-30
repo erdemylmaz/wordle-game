@@ -6,8 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Word Game</title>
 	<link rel="stylesheet" href="./style.css">
+	<!-- icons -->
+	<script src="https://kit.fontawesome.com/fa178081cb.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+
+	<div class="alert-box"></div>
 
 	<div class="main-content">
 		<div class="top">
@@ -16,15 +21,25 @@
 		</div>
 
 		<div class="buttons">
+			<div class="share-button button">Share</div>
 			<div class="button restart-button">Restart!</div>
 		</div>
 
+
 		<div class="saved-words">
 		</div>
+		
+		<div class="keyboard">
+		</div>
+
+	<textarea class="share-text" style="opacity: 0;"></textarea>
 	</div>
+
+
 
 	<script src="./words.js"></script>
 	<script src="./elements.js"></script>
+	<script src="./keyboard.js"></script>
 	<script src="./typing.js"></script>
 	<script src="./game.js"></script>
 </body>
