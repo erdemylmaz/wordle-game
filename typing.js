@@ -8,6 +8,17 @@ if (width <= 600) {
 }
 
 let randomNumber = Math.floor(Math.random() * turkishWords.length);
+
+if (JSON.parse(localStorage.getItem("unlockedWords")).length != 0) {
+  let unlockedWords = JSON.parse(localStorage.getItem("unlockedWords"));
+
+  unlockedWords.forEach((unlockedWord) => {
+    while (randomNumber == unlockedWord.id) {
+      randomNumber = Math.floor(Math.random() * turkishWords.length);
+    }
+  });
+}
+
 let word = turkishWords[randomNumber];
 
 let length = word.length;
@@ -85,6 +96,15 @@ type = (e) => {
         localStorage.getItem("correctlyGuessedWordCount")
       );
       localStorage.setItem("correctlyGuessedWordCount", winCount + 1);
+
+      let unlockedWords = JSON.parse(localStorage.getItem("unlockedWords"));
+
+      unlockedWords.push({
+        word: word,
+        id: randomNumber,
+      });
+
+      localStorage.setItem("unlockedWords", JSON.stringify(unlockedWords));
 
       alertBox.textContent = "You won, congratulations";
       alertBox.style.display = "block";

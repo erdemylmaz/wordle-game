@@ -19,6 +19,10 @@ const dataList = [
     name: "Ortalama Kelime Başı Tahmin Sayısı",
     value: 0,
   },
+  {
+    name: "Bilinen Kelimeler",
+    value: JSON.parse(localStorage.getItem("unlockedWords")),
+  },
 ];
 
 const dataListArea = document.querySelector(".account-data");
@@ -31,11 +35,36 @@ dataList.forEach((data, index) => {
     data.value = (dataList[2].value / dataList[3].value).toFixed(2);
   }
 
-  if (index !== 0) {
+  if (index !== 0 && index !== 5) {
     div.innerHTML = `
   	<div class="data-title">${data.name} :</div>
   	<div class="data-value">${data.value}</div>
   `;
+  } else if (index == 5) {
+    console.log(data.value);
+    div.innerHTML = `
+  	<div class="data-title">${data.name} :</div>
+
+  	<div class="data-value list">
+		<div class="list-top">${data.value.length}/${turkishWords.length}</div>  
+
+		<div class="words-list">
+
+		</div>
+	</div>
+  `;
+
+    dataListArea.appendChild(div);
+    let wordsList = document.querySelector(".words-list");
+
+    data.value.forEach((wordData) => {
+      let div = document.createElement("div");
+      div.className = "data-word";
+
+      div.textContent = `${wordData.id}. ${wordData.word}`;
+
+      wordsList.appendChild(div);
+    });
   } else {
     let date = data.value;
 
@@ -56,8 +85,6 @@ dataList.forEach((data, index) => {
       counter = `${Math.floor(minuteCount)} Minutes`;
     }
 
-    console.log(time, date[date.length - 1], time - date[date.length - 1]);
-
     let dateData = `${date[0]}.${date[1]}.${date[2]} <span class="count">(${counter} Ago)</span>`;
 
     div.innerHTML = `
@@ -66,5 +93,7 @@ dataList.forEach((data, index) => {
   `;
   }
 
-  dataListArea.appendChild(div);
+  if (index !== 5) {
+    dataListArea.appendChild(div);
+  }
 });

@@ -13,6 +13,10 @@ function initWord() {
     textBoxes = document.querySelectorAll(".letter-box");
   }
 
+  if (!localStorage.getItem("unlockedWords")) {
+    localStorage.setItem("unlockedWords", JSON.stringify([]));
+  }
+
   if (!localStorage.getItem("firstDate")) {
     let d = new Date();
 
@@ -28,6 +32,7 @@ function initWord() {
     localStorage.setItem("guessedWordCount", 0);
     localStorage.setItem("correctlyGuessedWordCount", 0);
     localStorage.setItem("playedGameCount", 1);
+    localStorage.setItem("unlockedWords", JSON.stringify([]));
   } else {
     let playedCount = parseInt(localStorage.getItem("playedGameCount"));
     localStorage.setItem("playedGameCount", playedCount + 1);
